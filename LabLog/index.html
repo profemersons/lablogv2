@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Sistema Logístico</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <h2>Login</h2>
+
+  <input type="text" id="usuario" placeholder="Login (ex: joao.alpha)">
+  <input type="password" id="senha" placeholder="Senha">
+
+  <button onclick="fazerLogin()">Entrar</button>
+
+  <div id="loading" style="display:none; margin-top:10px;">
+    ⏳ Carregando...
+  </div>
+
+  <p id="mensagem" style="color:red;"></p>
+
+  <script src="login.js"></script>
+  
+  <div id="loader" class="loader hidden">
+    <div class="spinner"></div>
+  </div>
+
+</body>
+
+</html>

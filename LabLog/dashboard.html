@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- MENU -->
+        <div class="sidebar">
+            <h2 id="empresaNome">Empresa</h2>
+
+            <div class="menu-item" onclick="carregarPagina('dashboard')">🏠 Dashboard</div>
+            <div class="menu-item" onclick="carregarPagina('cadastroFornecedor')">
+                ➕ Cadastrar Fornecedor
+            </div>
+
+            <div class="menu-item" onclick="carregarPagina('listaFornecedor')">
+                🔍 Consultar Fornecedores
+            </div>
+            <div class="menu-item" onclick="carregarPagina('compras')">📦 Compras</div>
+            <div class="menu-item" onclick="carregarPagina('logistica')">🚚 Logística</div>
+            <div class="menu-item" onclick="carregarPagina('eventos')">⚠️ Eventos</div>
+
+            <br>
+            <button onclick="logout()">Sair</button>
+        </div>
+
+        <!-- CONTEÚDO DINÂMICO -->
+        <div class="content">
+            <div id="conteudo"></div>
+        </div>
+
+    </div>
+
+    <script src="dashboard.js"></script>
+    <div id="loader" class="loader hidden">
+    <div class="spinner"></div>
+  </div>
+  <div id="toast" class="toast"></div>
+
+</body>
+
+</html>
