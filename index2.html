@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema Empresarial</title>
+</head>
+
+<body>
+
+    <h1>📊 Sistema Empresarial</h1>
+
+    <select id="empresaSelect">
+        <option value="">Selecione a empresa</option>
+    </select>
+
+    <button onclick="carregarEventos()">Entrar</button>
+
+    <ul id="lista-eventos"></ul>
+
+    <h2>Detalhes do Evento</h2>
+    <div id="detalhes-evento"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+    <script>
+        const supabaseUrl = 'https://upmbqjwqwotmdqlfijxc.supabase.co'
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVwbWJxandxd290bWRxbGZpanhjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUxNjEzOTQsImV4cCI6MjA5MDczNzM5NH0.grgeLJj2IrPxag60qalvbf_-DMRpBi6rbGWD7aUJ0vQ'
+
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        async function carregarEmpresas() {
+            const { data } = await supabaseClient.from("empresas").select("*");
+
+            const select = document.getElementById("empresaSelect");
+
+            data.forEach(emp => {
+                const option = document.createElement("option");
+                option.value = emp.id;
+                option.textContent = emp.nome;
+                select.appendChild(option);
+            });
+        }
+
+        async function carregarEventos() {
+            const empresaId = document.getElementById("empresaSelect").value;
+
+            if (!empresaId) {
+                alert("Selecione uma empresa");
+                return;
+            }
+
+            const lista = document.getElementById("lista-eventos");
+            lista.innerHTML = "Carregando...";
+
+            const { data } = await supabaseClient
+                .from("eventos")
+                .select("*")
+                .eq("empresa_id", empresaId);
+
+            lista.innerHTML = "";
+
+            data.forEach(evento => {
+                const item = document.createElement("li");
+
+                item.innerHTML = `
+          ${evento.titulo} - ${evento.status}
+          <button onclick="verDetalhes(${evento.id})">Ver</button>
+        `;
+
+                lista.appendChild(item);
+            });
+        }
+
+        async function verDetalhes(id) {
+            const { data } = await supabaseClient
+                .from("eventos")
+                .select("*")
+                .eq("id", id)
+                .single();
+
+            const div = document.getElementById("detalhes-evento");
+
+            div.innerHTML = `
+        <h3>${data.titulo}</h3>
+        <p>${data.descricao || ""}</p>
+        <button onclick="resolverEvento(${data.id})">Resolver</button>
+      `;
+        }
+
+        async function resolverEvento(id) {
+            await supabaseClient
+                .from("eventos")
+                .update({ status: "resolvido" })
+                .eq("id", id);
+
+            alert("Resolvido!");
+            carregarEventos();
+        }
+
+        carregarEmpresas();
+    </script>
+
+</body>
+
+</html>
