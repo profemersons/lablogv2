@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema Empresarial</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h3>👤 Usuário</h3>
+    <select id="usuarioSelect">
+        <option value="">Selecione seu nome</option>
+        <option value="Aluno 1">Aluno 1</option>
+        <option value="Aluno 2">Aluno 2</option>
+        <option value="Professor">Professor</option>
+    </select>
+
+    <h1>📊 Sistema Empresarial</h1>
+
+    <select id="empresaSelect">
+        <option value="">Selecione a empresa</option>
+    </select>
+
+    <button onclick="carregarEventos()">Entrar</button>
+
+    <h3>📊 Resumo</h3>
+    <p id="resumo"></p>
+
+    <ul id="lista-eventos"></ul>
+
+    <h2>Detalhes do Evento</h2>
+    <div id="detalhes-evento"></div>
+
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- SEU JS -->
+    <script src="app.js"></script>
+
+</body>
+
+</html>

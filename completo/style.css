@@ -1,0 +1,13 @@
+body {
+    font-family: Arial;
+    margin: 20px;
+}
+
+button {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+li {
+    margin-bottom: 10px;
+}
